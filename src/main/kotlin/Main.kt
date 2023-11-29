@@ -1,32 +1,15 @@
 fun main() {
-    var lines = 0
-    print("Enter number of rows: ")
-    while (lines < 1 || lines > 8) {
-        var input = ""
-        while (input == "") {
-            input = (readlnOrNull().toString())
-            if (input == "") {
-                print("Enter number of rows: ")
-            }
-        }
-        lines = input.toInt()
-        if (lines < 1 || lines > 8) {
-            println("above 0 but below 9 please")
-        }
-    }
+    var lines: Int
+    do {
+        print("Enter number of rows between 1 & 8: ")
+        lines = readlnOrNull()?.toIntOrNull() ?: 0
+        if (lines !in 1..8) println("Above 0 but below 9 please")
+    } while (lines !in 1..8)
 
-    for (line in 1.. lines){
-
-        for ( spaces in line..lines ){
-            print(" ")
-        }
-        for ( stars in 1..line ){
-            print("*")
-        }
+    repeat(lines) { line ->
+        print(" ".repeat(lines - line - 1))
+        print("*".repeat(line + 1))
         print("  ")
-        for ( stars in 1..line ){
-            print("*")
-        }
-        println()
+        println("*".repeat(line + 1))
     }
 }
